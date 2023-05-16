@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import {
     Heading,
@@ -16,6 +16,7 @@ export default function CreateArticle() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [loading, setLoading] = useState(false);
+    const [isPending, startTransition] = useTransition();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -29,6 +30,9 @@ export default function CreateArticle() {
         });
         setLoading(false);
         router.push("/");
+        startTransition(() => {
+            router.refresh();
+        });
     };
 
     return (
@@ -48,7 +52,7 @@ export default function CreateArticle() {
                         type="submit"
                         color="white"
                         bg="orange.400"
-                        isLoading={loading}
+                        isLoading={loading || isPending}
                         mt={4}
                     >
                         作成
