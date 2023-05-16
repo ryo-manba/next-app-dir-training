@@ -19,7 +19,6 @@ const getArticle = async (slug: string) => {
 };
 
 const getComments = async (slug: string) => {
-    console.log('getComments slug:', slug);
     // コメントは投稿されたら即座に反映したいのでキャッシュしない
     const res = await fetch(
         `http://localhost:3000/api/articles/${slug}/comments`,
@@ -33,8 +32,7 @@ const getComments = async (slug: string) => {
     }
 
     const data = await res.json();
-    console.log('data', data);
-    return data as Comment[];
+    return data.comments as Comment[];
 };
 
 export default async function ArticleDetail({
@@ -50,16 +48,13 @@ export default async function ArticleDetail({
         commentsPromise,
     ]);
 
-    console.log('article', article);
-    console.log('comments', comments);
-
     return (
         <div>
             <h1>{article.title}</h1>
             <p>{article.content}</p>
             <h2>Comments</h2>
             <ul>
-                {comments?.map((comment) => (
+                {comments.map((comment) => (
                     <li key={comment.id}>{comment.body}</li>
                 ))}
             </ul>
