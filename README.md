@@ -1,1 +1,1 @@
-# next-13-training
+# next-app-dir-training
