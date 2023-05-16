@@ -17,6 +17,7 @@ async function getArticles() {
 
 export default async function Home() {
   const articles = await getArticles();
+  console.log("ここが呼ばれる？？？")
 
   return (
     <div>
