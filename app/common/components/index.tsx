@@ -1,2 +1,2 @@
-"use client";
-export * from "@chakra-ui/react";
+'use client';
+export * from '@chakra-ui/react';

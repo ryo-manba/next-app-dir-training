@@ -1,14 +1,14 @@
-import type { Article } from "./types";
-import ArticleList from "./components/ArticleList";
-import { Heading } from "./common/components";
+import type { Article } from './types';
+import ArticleList from './components/ArticleList';
+import { Heading } from './common/components';
 
 async function getArticles() {
-  const res = await fetch("http://localhost:3000/api/articles", {
-    cache: "no-store",
+  const res = await fetch('http://localhost:3000/api/articles', {
+    cache: 'no-store',
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch articles");
+    throw new Error('Failed to fetch articles');
   }
 
   const data = await res.json();
@@ -17,14 +17,13 @@ async function getArticles() {
 
 export default async function Home() {
   const articles = await getArticles();
-  console.log("ここが呼ばれる？？？")
 
   return (
     <div>
-      <Heading as="h1" mb={4}>
+      <Heading as='h1' mb={4}>
         新着記事
       </Heading>
       <ArticleList articles={articles} />
     </div>
-  )
+  );
 }
